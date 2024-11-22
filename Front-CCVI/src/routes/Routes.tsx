@@ -9,6 +9,7 @@ import Unauthorized from '../pages/Unauthorized';
 import Register from '../pages/Signup';
 import BookingPage from '../pages/BookingPage';
 import FlightSearchPage from '../pages/FlightSearchPage';
+import DestinationPage from '../pages/DestinationPage';
 
 
 const routes = createRoutesFromElements(
@@ -20,6 +21,7 @@ const routes = createRoutesFromElements(
         <Route path="/unauthorized" element={<Unauthorized />} />
         <Route path="/booking" element={<BookingPage />} />
         <Route path="/flights" element={<FlightSearchPage />} />
+        <Route path="/destination" element={<DestinationPage />} />
 
 
         {/* Protected routes with role-based access */}

@@ -22,7 +22,7 @@ const Index: React.FC = () => {
                         </div>
                         
                         <ul className="hidden md:flex items-center space-x-12">
-                            <li><Link to="/destinations" className="hover:text-blue-400 transition-colors duration-300">Destinations</Link></li>
+                            <li><Link to="/destination" className="hover:text-blue-400 transition-colors duration-300">Destinations</Link></li>
                             <li><Link to="/contact" className="hover:text-blue-400 transition-colors duration-300">Contact</Link></li>
                         </ul>
 
