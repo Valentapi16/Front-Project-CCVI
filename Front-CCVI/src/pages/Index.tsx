@@ -62,7 +62,7 @@ const Index: React.FC = () => {
 
                             {/* Action Buttons */}
                             <div className="flex flex-col sm:flex-row gap-4 pt-4">
-                                <Link to="/book" className="flex-1 sm:flex-none">
+                                <Link to="/booking" className="flex-1 sm:flex-none">
                                     <button className="w-full sm:w-auto bg-blue-500 text-white px-8 py-4 rounded-lg text-lg font-medium hover:bg-blue-600 transition-all duration-300 shadow-lg shadow-blue-500/30">
                                         Book Your Flight
                                     </button>

@@ -7,6 +7,7 @@ import Admin from '../pages/Admin';
 import User from '../pages/User';
 import Unauthorized from '../pages/Unauthorized';
 import Register from '../pages/Signup';
+import BookingPage from '../pages/BookingPage';
 
 const routes = createRoutesFromElements(
     <>
@@ -15,6 +16,7 @@ const routes = createRoutesFromElements(
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Register />} />
         <Route path="/unauthorized" element={<Unauthorized />} />
+        <Route path="/booking" element={<BookingPage />} />
 
         {/* Protected routes with role-based access */}
         <Route element={<RequireAuth allowedRoles={['ROLE_ADMIN']} />}>
