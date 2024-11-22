@@ -22,7 +22,6 @@ const Index: React.FC = () => {
                         </div>
                         
                         <ul className="hidden md:flex items-center space-x-12">
-                            <li><Link to="/" className="text-blue-400 font-medium">Flights</Link></li>
                             <li><Link to="/destinations" className="hover:text-blue-400 transition-colors duration-300">Destinations</Link></li>
                             <li><Link to="/contact" className="hover:text-blue-400 transition-colors duration-300">Contact</Link></li>
                         </ul>
@@ -57,19 +56,19 @@ const Index: React.FC = () => {
                             
                             <p className="text-gray-300 text-lg leading-relaxed max-w-xl">
                                 Experience seamless travel with our award-winning service. 
-                                Connecting you to over 150 destinations worldwide.
+                                Connecting you to over 12 destinations worldwide.
                             </p>
 
                             {/* Action Buttons */}
                             <div className="flex flex-col sm:flex-row gap-4 pt-4">
                                 <Link to="/booking" className="flex-1 sm:flex-none">
                                     <button className="w-full sm:w-auto bg-blue-500 text-white px-8 py-4 rounded-lg text-lg font-medium hover:bg-blue-600 transition-all duration-300 shadow-lg shadow-blue-500/30">
-                                        Book Your Flight
+                                        Manage your Booking
                                     </button>
                                 </Link>
-                                <Link to="/offers" className="flex-1 sm:flex-none">
+                                <Link to="/flights" className="flex-1 sm:flex-none">
                                     <button className="w-full sm:w-auto bg-white/10 backdrop-blur-sm border border-white/20 px-8 py-4 rounded-lg text-lg font-medium hover:bg-white/20 transition-all duration-300">
-                                        Special Offers
+                                        Flights 
                                     </button>
                                 </Link>
                             </div>
@@ -78,7 +77,7 @@ const Index: React.FC = () => {
                         {/* Right Column - Stats/Features */}
                         <div className="hidden md:grid grid-cols-2 gap-6 content-center">
                             <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20">
-                                <div className="text-4xl font-bold text-blue-400">150+</div>
+                                <div className="text-4xl font-bold text-blue-400">12+</div>
                                 <div className="text-gray-300 mt-2">Destinations</div>
                             </div>
                             <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20">
