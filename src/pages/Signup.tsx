@@ -8,32 +8,51 @@ const Signup: React.FC = () => {
     const [password, setPassword] = useState('');
     const [email, setEmail] = useState('');
     const [phone, setPhone] = useState('');
-    const [rh, setRh] = useState(''); // estos parametros se deben modificar según su back
-    const [weight, setWeight] = useState(0);  // y no es aquí lo importante, sino en los métodos de /src/services/AuthService.ts
-    const [message, setMessage] = useState(''); //ahí también es donde manejo el login y la decodificación del token para
-    const [error, setError] = useState(''); // re dirigir en el login según su role. Yo solo tengo ROLE_ADMIN y ROLE_USER
+    const [name, setName] = useState('');
+    const [lastName, setLastName] = useState('');
+    const [hasMiles] = useState(false); // Removido setHasMiles ya que no se usa
+    const [gender, setGender] = useState('');
+    const [birthDate, setBirthDate] = useState('');
+    const [nationality, setNationality] = useState('');
+    const [idType, setIdType] = useState('');
+    const [passengerFrequentNumber, setPassengerFrequentNumber] = useState('');
+    const [message, setMessage] = useState('');
+    const [error, setError] = useState('');
     const navigate = useNavigate();
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setError('');
         setMessage('');
-
+    
         try {
-            const result = await signup(username, password, email, phone, rh, weight);
-
+            const result = await signup({
+                username,
+                password,
+                email,
+                phone,
+                name,
+                lastName,
+                hasMiles,
+                gender,
+                birthDate,
+                nationality,
+                idType,
+                passengerFrequentNumber,
+            });
+    
             if (!result) {
                 setError('Failed to register');
                 return;
             }
-
+    
             setMessage(result);
             navigate('/login');
-        } catch (err) {
-            setError('An error occurred during signup. Please try again.');
+        } catch (error) {
+            setError(`An error occurred: ${error instanceof Error ? error.message : 'Please try again.'}`);
         }
     };
-
+    
     return (
         <div className="min-h-screen w-full relative">
             {/* Background */}
@@ -43,13 +62,13 @@ const Signup: React.FC = () => {
                     backgroundImage: `url(${background})`,
                     backgroundSize: 'cover',
                     backgroundPosition: 'center',
-                    backgroundRepeat: 'no-repeat'
+                    backgroundRepeat: 'no-repeat',
                 }}
             />
-            
+
             {/* Content */}
             <div className="relative min-h-screen w-full flex items-center justify-center px-4">
-                <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl w-full max-w-xl p-8 md:p-12 shadow-2xl">
+                <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl w-full max-w-2xl p-8 md:p-12 shadow-2xl">
                     {/* Header */}
                     <div className="text-center mb-10">
                         <h1 className="text-3xl md:text-4xl font-bold text-white mb-3">Join SkyConnect</h1>
@@ -103,6 +122,36 @@ const Signup: React.FC = () => {
                                         required
                                     />
                                 </div>
+                                <div>
+                                    <label className="block text-white text-sm font-medium mb-2">Name</label>
+                                    <input
+                                        type="text"
+                                        value={name}
+                                        onChange={(e) => setName(e.target.value)}
+                                        className="w-full px-4 py-3 rounded-xl border border-white/30 bg-white/10 placeholder-white/50 text-white focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent transition duration-200"
+                                        required
+                                    />
+                                </div>
+                                <div>
+                                    <label className="block text-white text-sm font-medium mb-2">Last Name</label>
+                                    <input
+                                        type="text"
+                                        value={lastName}
+                                        onChange={(e) => setLastName(e.target.value)}
+                                        className="w-full px-4 py-3 rounded-xl border border-white/30 bg-white/10 placeholder-white/50 text-white focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent transition duration-200"
+                                        required
+                                    />
+                                </div>
+                                <div>
+                                    <label className="block text-white text-sm font-medium mb-2">Birth Date</label>
+                                    <input
+                                        type="date"
+                                        value={birthDate}
+                                        onChange={(e) => setBirthDate(e.target.value)}
+                                        className="w-full px-4 py-3 rounded-xl border border-white/30 bg-white/10 placeholder-white/50 text-white focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent transition duration-200"
+                                        required
+                                    />
+                                </div>
                             </div>
 
                             {/* Right column */}
@@ -114,61 +163,63 @@ const Signup: React.FC = () => {
                                         value={phone}
                                         onChange={(e) => setPhone(e.target.value)}
                                         className="w-full px-4 py-3 rounded-xl border border-white/30 bg-white/10 placeholder-white/50 text-white focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent transition duration-200"
-                                        required
                                     />
                                 </div>
                                 <div>
-                                    <label className="block text-white text-sm font-medium mb-2">Blood Type (RH)</label>
+                                    <label className="block text-white text-sm font-medium mb-2">Gender</label>
+                                    <select
+                                        value={gender}
+                                        onChange={(e) => setGender(e.target.value)}
+                                        className="w-full px-4 py-3 rounded-xl border border-white/30 bg-white/10 text-white focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent transition duration-200"
+                                        required
+                                    >
+                                        <option className="text-black bg-white" value="">Select Gender</option>
+                                        <option className="text-black bg-white" value="MASCULINE">Masculine</option>
+                                        <option className="text-black bg-white" value="FEMENINNE">Feminine</option>
+                                        <option className="text-black bg-white" value="OTHER">Other</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label className="block text-white text-sm font-medium mb-2">Nationality</label>
                                     <input
                                         type="text"
-                                        value={rh}
-                                        onChange={(e) => setRh(e.target.value)}
+                                        value={nationality}
+                                        onChange={(e) => setNationality(e.target.value)}
                                         className="w-full px-4 py-3 rounded-xl border border-white/30 bg-white/10 placeholder-white/50 text-white focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent transition duration-200"
                                         required
                                     />
                                 </div>
                                 <div>
-                                    <label className="block text-white text-sm font-medium mb-2">Weight (kg)</label>
-                                    <input
-                                        type="number"
-                                        value={weight}
-                                        onChange={(e) => setWeight(parseFloat(e.target.value))}
-                                        className="w-full px-4 py-3 rounded-xl border border-white/30 bg-white/10 placeholder-white/50 text-white focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent transition duration-200"
+                                    <label className="block text-white text-sm font-medium mb-2">ID Type</label>
+                                    <select
+                                        value={idType}
+                                        onChange={(e) => setIdType(e.target.value)}
+                                        className="w-full px-4 py-3 rounded-xl border border-white/30 bg-white/10 text-white focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent transition duration-200"
                                         required
+                                    >
+                                        <option className="text-black bg-white" value="">Select ID Type</option>
+                                        <option className="text-black bg-white" value="DNI">DNI</option>
+                                        <option className="text-black bg-white" value="PASSPORT">Passport</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label className="block text-white text-sm font-medium mb-2">Frequent Flyer Number</label>
+                                    <input
+                                        type="text"
+                                        value={passengerFrequentNumber}
+                                        onChange={(e) => setPassengerFrequentNumber(e.target.value)}
+                                        className="w-full px-4 py-3 rounded-xl border border-white/30 bg-white/10 placeholder-white/50 text-white focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent transition duration-200"
                                     />
                                 </div>
                             </div>
                         </div>
-
-                        {/* Terms */}
-                        <div className="flex items-center mt-6">
-                            <input
-                                type="checkbox"
-                                id="terms"
-                                className="h-4 w-4 rounded border-white/30 bg-white/10 text-blue-500 focus:ring-blue-400"
-                                required
-                            />
-                            <label htmlFor="terms" className="ml-2 block text-sm text-white">
-                                I agree to the <a href="#" className="text-blue-400 hover:text-blue-300">Terms and Conditions</a>
-                            </label>
-                        </div>
-
-                        {/* Submit Button */}
                         <button
                             type="submit"
-                            className="w-full py-4 px-4 text-base font-semibold rounded-xl text-white bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition duration-200 shadow-lg"
+                            className="w-full px-4 py-3 rounded-xl bg-blue-500 text-white font-medium hover:bg-blue-400 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-50 transition duration-200"
                         >
-                            Create Account
+                            Register
                         </button>
                     </form>
-
-                    {/* Footer */}
-                    <p className="mt-8 text-center text-sm text-white/60">
-                        Already have an account?{' '}
-                        <a href="/login" className="text-blue-400 hover:text-blue-300 font-medium">
-                            Sign in
-                        </a>
-                    </p>
                 </div>
             </div>
         </div>

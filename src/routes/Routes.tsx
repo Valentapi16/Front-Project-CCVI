@@ -1,3 +1,4 @@
+import React from 'react';
 // src/routes/Routes.tsx
 import { createBrowserRouter, createRoutesFromElements, Route } from 'react-router-dom';
 import RequireAuth from '../components/RequireAuth';
@@ -7,9 +8,9 @@ import Admin from '../pages/Admin';
 import User from '../pages/User';
 import Unauthorized from '../pages/Unauthorized';
 import Register from '../pages/Signup';
-import BookingPage from '../pages/BookingPage';
 import FlightSearchPage from '../pages/FlightSearchPage';
 import DestinationPage from '../pages/DestinationPage';
+import BookingPage from '../pages/BookingPage';
 
 
 const routes = createRoutesFromElements(

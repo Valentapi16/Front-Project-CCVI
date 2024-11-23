@@ -1,5 +1,6 @@
 // src/pages/Admin.tsx
 import { useAuth } from '../context/AuthContext';
+import React from 'react';
 
 const Admin = () => {
     const { userRole } = useAuth();

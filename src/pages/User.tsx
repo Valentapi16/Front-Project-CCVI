@@ -1,4 +1,4 @@
-
+import React from 'react';
 // src/pages/User.tsx
 import { useAuth } from '../context/AuthContext';
 

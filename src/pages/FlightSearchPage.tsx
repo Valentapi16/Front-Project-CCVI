@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import FlightSearchForm from '../components/Flights/FlightSearchForm'; // Asegúrate de importar el formulario de búsqueda
+import React from 'react';
+import FlightSearchForm from '../components/FlightSearchForm'; // Asegúrate de importar el formulario de búsqueda
 import background from '../assets/booking-bg.jpg'; // Asegúrate de importar la imagen correctamente
 
 const FlightSearchPage: React.FC = () => {

@@ -54,12 +54,25 @@ export const login = async (username: string, password: string): Promise<string 
     }
 };
 
-export const signup = async (username: string, password: string, email: string, phone: string, rh: string, weight: number): Promise<string | null> => {
+export const signup = async (userData: {
+    username: string;
+    password: string;
+    email: string;
+    phone: string;
+    name: string;
+    lastName: string;
+    hasMiles: boolean;
+    gender: string;
+    birthDate: string;
+    nationality: string;
+    idType: string;
+    passengerFrequentNumber?: string;
+}): Promise<string | null> => {
     try {
         const response = await fetch('http://localhost:8080/api/auth/signup', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ username, password, email, phone, rh, weight })
+            body: JSON.stringify(userData),
         });
 
         if (!response.ok) {
@@ -72,6 +85,7 @@ export const signup = async (username: string, password: string, email: string, 
         return null;
     }
 };
+
 
 // Utility function to decode JWT
 export const decodeToken = (token: string) => {

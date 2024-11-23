@@ -135,7 +135,7 @@ const Login: React.FC = () => {
 
                     {/* Footer */}
                     <p className="mt-6 text-center text-white/60 text-sm">
-                        Don't have an account?{' '}
+                        Don&apos;t have an account?{' '}
                         <a href="/signup" className="text-blue-100 hover:text-white font-medium transition-colors duration-200">
                             Join SkyFly
                         </a>
