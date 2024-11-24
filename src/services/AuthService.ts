@@ -26,12 +26,12 @@ export const isTokenExpired = (): boolean => {
 };
 
 // src/services/AuthService.ts
-export const login = async (username: string, password: string): Promise<string | null> => {
+export const login = async (email: string, password: string): Promise<string | null> => {
     try {
-        const response = await fetch('http://localhost:8080/api/auth/login', {
+        const response = await fetch('http://localhost:8081/api/auth/login', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ username, password }),
+            body: JSON.stringify({ email, password }),
         });
 
         console.log('Login response status:', response.status); // Debug log
@@ -69,7 +69,7 @@ export const signup = async (userData: {
     passengerFrequentNumber?: string;
 }): Promise<string | null> => {
     try {
-        const response = await fetch('http://localhost:8080/api/auth/signup', {
+        const response = await fetch('http://localhost:8081/api/auth/register', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(userData),

@@ -198,7 +198,7 @@ const Signup: React.FC = () => {
                                         required
                                     >
                                         <option className="text-black bg-white" value="">Select ID Type</option>
-                                        <option className="text-black bg-white" value="DNI">DNI</option>
+                                        <option className="text-black bg-white" value="NATIONAL_DOCUMENT">National ID</option>
                                         <option className="text-black bg-white" value="PASSPORT">Passport</option>
                                     </select>
                                 </div>

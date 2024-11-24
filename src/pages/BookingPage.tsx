@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { fetchBookingDetails } from '../services/BookingService';
-import background from '../assets/booking-bg.jpg';
+import background from '../assets/background.png';
 
 interface BookingDetails {
  passengerName: string;

@@ -1,6 +1,6 @@
 import React from 'react';
 import FlightSearchForm from '../components/FlightSearchForm'; // Asegúrate de importar el formulario de búsqueda
-import background from '../assets/booking-bg.jpg'; // Asegúrate de importar la imagen correctamente
+import background from '../assets/background.png'; // Asegúrate de importar la imagen correctamente
 
 const FlightSearchPage: React.FC = () => {
   const handleSearch = (searchParams: {

@@ -3,9 +3,10 @@ import { login } from '../services/AuthService';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import background from '../assets/login.png';
+import JWTService from '../services/JWTService';
 
 const Login: React.FC = () => {
-    const [username, setUsername] = useState('');
+    const [email, setEmail] = useState(''); 
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
     const navigate = useNavigate();
@@ -15,40 +16,30 @@ const Login: React.FC = () => {
         e.preventDefault();
         setError('');
 
-        try {
-            const token = await login(username, password);
-            console.log('Received token:', token);
+        const token = await login(email, password);
+        if (!token) {
+            setError('Failed to login');
+            return;
+        }
 
-            if (!token) {
-                setError('Failed to login');
-                return;
-            }
+        authLogin(token);
 
-            authLogin(token);
+        const decoded = JWTService.getDecodedToken(token);
+        const userRole = decoded?.roles?.[0] || null;
 
-            const tokenParts = token.split('.');
-            const payload = JSON.parse(atob(tokenParts[1]));
-            const userRole = payload.roles?.[0] || payload.role || payload.authorities?.[0];
-
-            if (userRole?.includes('ROLE_ADMIN')) {
-                console.log('Redirecting to admin');
+        if (userRole) {
+            if (userRole.includes('ROLE_ADMIN')) {
                 navigate('/admin', { replace: true });
-            } else if (userRole?.includes('ROLE_USER')) {
-                console.log('Redirecting to user');
+            } else if (userRole.includes('ROLE_USER')) {
                 navigate('/user', { replace: true });
             } else {
-                console.log('No role found, redirecting to home');
                 navigate('/', { replace: true });
             }
-        } catch (err) {
-            console.error('Login error:', err);
-            setError('An error occurred during login. Please check the console for details.');
         }
     };
 
     return (
         <div className="min-h-screen w-full relative">
-            {/* Background Image */}
             <div
                 className="absolute inset-0 w-full h-full"
                 style={{
@@ -81,16 +72,17 @@ const Login: React.FC = () => {
 
                     <form onSubmit={handleSubmit} className="space-y-6">
                         <div className="space-y-2">
-                            <label htmlFor="username" className="block text-white text-sm font-medium pl-1">
-                                Username
+                            <label htmlFor="email" className="block text-white text-sm font-medium pl-1">
+                                Email
                             </label>
                             <input
-                                id="username"
-                                type="text"
-                                value={username}
-                                onChange={(e) => setUsername(e.target.value)}
+                                id="email"
+                                type="email"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
                                 className="w-full px-4 py-3 rounded-xl border border-white/30 bg-white/10 placeholder-white/50 text-white focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent transition duration-200"
-                                placeholder="Enter your username"
+                                placeholder="Enter your email"
+                                required 
                             />
                         </div>
 
@@ -105,6 +97,7 @@ const Login: React.FC = () => {
                                 onChange={(e) => setPassword(e.target.value)}
                                 className="w-full px-4 py-3 rounded-xl border border-white/30 bg-white/10 placeholder-white/50 text-white focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent transition duration-200"
                                 placeholder="Enter your password"
+                                required 
                             />
                         </div>
 
